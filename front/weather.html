@@ -1,0 +1,203 @@
+<head>
+  <meta charset="utf-8" />
+  <!-- 引入vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <!-- 引入http-vue-loader -->
+  <script src="https://unpkg.com/http-vue-loader"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- 这里使用了element ui框架 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+  />
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+  <title>高校MRBS会议室预约系统</title>
+  <link href="css/clndr.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+  <link rel="stylesheet" href="styless.css">
+  <title></title>
+</head>
+
+<style>
+  body,
+  html {
+    margin: 0;
+  }
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    background-image: url("imagesbb/bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+  }
+</style>
+<body>
+<div class="left-side sticky-left-side">
+  <div class="logo" >
+    <h3 style="color: white">&nbsp;&nbsp;&nbsp;会议室预约系统</h3>
+  </div>
+  <div class="logo-icon text-center">
+  </div>
+  <div class="left-side-inner">
+    <ul class="nav nav-pills nav-stacked custom-nav">
+      <br>
+      <li><a href="index.php"><i class="fa fa-home"></i> <span>首页</span></a></li>
+      <li><a href="message.php"><i class="fa fa-archive"></i> <span>我须留意</span></a></li>
+      <li><a href="search.php"><i class="fa fa-cogs"></i> <span>会议室查询</span></a> </li>
+      <li class="menu-list"><a href="book.php"><i class="fa fa-file-text"></i> <span>我要预约</span></a></li>
+      <li><a href="conferenceall.php"><i class="fa fa-bullhorn"></i> <span>预约情况</span></a> </li>
+      <li><a href="book_list.php"><i class="fa fa-bullhorn"></i> <span>我的预约</span></a> </li>
+      <li><a href="current.php"><i class="fa fa-bullhorn"></i> <span>当前会议</span></a> </li>
+      <li><a href="xitong.php"><i class="fa fa-bullhorn"></i> <span>系统消息</span></a> </li>
+      <li><a href="lun.php"><i class="fa fa-bullhorn"></i> <span>论坛留言</span></a> </li>
+      <li><a href="weather.html"><i class="fa fa-bullhorn"></i> <span>天气预报</span></a> </li>
+    </ul>
+  </div>
+</div>
+
+  <div id="app" class="wrapper">
+    <h2 style="margin-bottom: 20px">风里雨里，石大会议室永远等你</h2>
+    <div style="display: flex; align-items: center">
+      <el-input
+        autosize
+        style="width: 300px"
+        placeholder="请输入城市"
+        v-model="city"
+      >
+      </el-input>
+      <el-button type="primary" style="margin-left: 10px" @click="getData"
+        >查询</el-button
+      >
+    </div>
+    <div
+      style="
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 50%;
+        color: black;
+        font-size: 20px;
+      "
+    >
+      <div>当前城市：{{city}}</div>
+      <div>温度：{{temperature}}°C</div>
+      <div>天气：{{weather}}</div>
+    </div>
+
+    <div
+      style="
+        margin-top: 40px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+         font-size: 20px;
+      "
+    >
+      <div v-if="temperature>30">天气炎热，注意防范中暑喔！</div>
+      <div v-else-if="temperature>20">天气舒爽，美好一天心情愉悦</div>
+      <div v-else>体表温度阴凉，注意别感冒喔</div>
+    </div>
+
+    <h2 style="text-align: center; margin-top: 40px">未来三天天气</h2>
+    <div
+      style="
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      "
+    >
+      <div style="display: flex; width: 75%; justify-content: space-between;opacity: 0.75;">
+        <div
+          v-for="(item ,index) in list"
+          :key="index"
+          style="
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+          "
+        >
+          <div>时间：{{item.date}}</div>
+          <div>最高温度：{{item.high}}°C</div>
+          <div>最低温度：{{item.low}}°C</div>
+          <div>降水概率：{{item.precip}}%</div>
+          <div>相对湿度：{{item.humidity}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  Vue.use(httpVueLoader);
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        city: "青岛",
+        temperature: "",
+        weather: "",
+        list: [],
+      };
+    },
+    created() {
+      this.getData();
+      //   this.dayData();
+    },
+
+    methods: {
+      getData() {
+        const apiKey = "Snlm8SkwZ0F5My7NI"; //你的API Key
+        const apiUrl = `https://api.seniverse.com/v3/weather/now.json?key=${apiKey}&location=${this.city}&language=zh-Hans&unit=c`; //API请求URL地址
+
+        //发送API请求
+        $.ajax({
+          url: apiUrl,
+          type: "GET",
+          dataType: "json",
+          success: (res) => {
+            //处理API响应
+            this.temperature = res.results[0].now.temperature; //获取当前气温
+            this.weather = res.results[0].now.text; //获取当前天气状况
+            console.log(this.temperature, this.weather, "ddd");
+            this.dayData();
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+      },
+
+      dayData() {
+        const apiKey = "Snlm8SkwZ0F5My7NI"; //你的API Key
+        const apiUrl = `https://api.seniverse.com/v3/weather/daily.json?key=${apiKey}&location=${this.city}&unit=c&start=0&days=3`; //API请求URL地址
+
+        //发送API请求
+        $.ajax({
+          url: apiUrl,
+          type: "GET",
+          dataType: "json",
+          success: (res) => {
+            this.list = res.results[0].daily;
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+      },
+    },
+  });
+</script>

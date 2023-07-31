@@ -1,0 +1,272 @@
+html, body{
+    height: 100%;
+    font-family: 'Microsoft YaHei';
+}
+.background{
+    display:block;
+    position: fixed;
+    background: url("../image/hbu03.JPG");
+    background-repeat: no-repeat;
+    background-size: cover;
+    top:0px;
+    height:100%;
+    width: 100%;
+    z-index: -10;
+    overflow: hidden;
+}
+
+.main{
+    text-align:center;
+    height:100%;
+}
+.header{
+    padding-top: 70px;
+    text-align: left;
+    margin: 0 auto;
+    height: 48px;
+    width: 70%;
+    display: flex;
+}
+.portal-logo{
+    height:100%;
+}
+.portal-logo::after{
+    height: 90%;
+    display: inline-block;
+    vertical-align: middle;
+    content:"";
+    width:2px;
+    margin-left:20px;
+    background-color:white;
+}
+.portal-blank-logo{
+    height:100%;
+    width: 0px;
+}
+.portal-title{
+    margin-left:20px;
+    flex:1;
+    font-size: 33px;
+    color: #ffffff;
+}
+.no-logo {
+    margin-left:0 !important;
+}
+.container{
+    position: relative;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height:100%;
+    max-height:420px;
+    display:flex;
+}
+.notice-panel{
+    flex: 5;
+    float:left;
+    height: 100%;
+	background: rgba(0,0,0,.5);
+    overflow: auto;
+    display:block;
+    border-radius:6px;
+}
+.mobile-notice-panel{
+    display:none;
+}
+.notice-break-line{
+    background-color:white;
+    width:100%;
+    margin-top:14px;
+    margin-bottom:20px;
+    height:2px;
+}
+.notice-box {
+    padding-top: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.notice-title{
+    font-weight:bold;
+    font-size: 21px;
+    color:white;
+}
+.notice-content{
+    text-align:left;
+    text-indent:2em;
+    font-size: 16px;
+    color:white;
+    line-height: 2;
+}
+.notice-content img{
+    width: 100%;
+}
+.login-panel {
+    color:white;
+    margin-left:20px;
+    width: 350px;
+    height: 100%;
+    border-radius:6px;
+	background: rgba(0,0,0,.5);
+}
+.login-panel a {
+    color: white;
+	display: inline; 
+	margin: 30px;
+}
+
+.login-nav {
+    font-size: 16px;
+    display:flex;
+}
+.login-box{
+    padding-top: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.login-nav div{
+    flex:1;
+    height: 44px;
+    line-height: 44px;
+    cursor:pointer;
+    border-bottom: 1px solid white;
+}
+.login-nav div.on{
+    box-sizing: border-box;
+    border-bottom: 2px solid white;
+}
+.login-nav.only-auth div.on{
+    height: auto;
+    line-height: normal;
+    padding-bottom:14px;
+    font-weight:bold;
+    font-size: 21px;
+}
+
+.login-form-item {
+    height:40px;
+    margin-top:20px;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.el-input {
+    background-repeat:no-repeat;
+    background-position:left;
+    background-position-x: 15px;
+    background-size:19px 19px;
+    font-size: 14px;
+    width:100%;
+    height:42px;
+}
+.user-input{
+    background-image:url("../image/user01.png");
+}
+.password-input{
+    background-image:url("../image/sq-password.png");
+}
+.code-input{
+	background-image:url("../image/code.png");
+	width: 60%;
+}
+.loginCode{
+/*	position: absolute;*/
+	width: 29%;  
+	height: 95%;
+	margin: -40px 190px ;
+}
+.footer{
+    width: 100%;
+    bottom: 5px;
+    font-size: 14px;
+    color: white;
+    position: absolute;
+}
+
+.link-field{
+    margin-top:0;
+    margin-left:auto;
+    display:flex;
+    font-size:14px;
+    color:white;
+    text-align:left;
+}
+.link-login{
+    flex: 1;
+    padding-left:5px;
+}
+.link-login img{
+    width: 22px;
+    margin-right:5px;
+}
+.upper-login-field{
+    margin-top:10px;
+    display:flex;
+}
+.remember-field{
+    margin-left: auto;
+    text-align: left;
+    font-size: 14px;
+    width: 120px;
+}
+.msg{
+    text-align:left;
+    color:#ff4505;
+    flex:1;
+    padding-left:5px;
+}
+
+.el-input input{
+    background:none;
+    text-indent:41px;
+    -webkit-appearance: none;
+    border-radius: 14px;
+    border: 1px solid white;
+    box-sizing: border-box;
+    color: white;
+    display: block;
+    font-size: inherit;
+    height: 42px;
+    line-height: 1;
+    outline: 0;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
+.phone-code-input{
+    display:flex;
+}
+
+.code-input{
+    display:flex;
+}
+
+
+
+
+
+
+
+
+
+input[type=submit] {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    transition: .1s;
+    font-weight: 500;
+    border-radius: 4px;
+    height: 60px;
+    width: 200px;
+}
+
